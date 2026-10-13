@@ -1,0 +1,430 @@
+<title>Zeel Rajput Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: engineering-notebook. Graph-paper hero with a student ID card, then ruled sections for about, skills, projects and contact. */
+:root {
+  --bg: #edf0f4;
+  --surface: #f8f9fb;
+  --ink: #121c28;
+  --muted: #55626f;
+  --line: #cbd3dc;
+  --accent: #2646e0;
+  --accent-ink: #ffffff;
+  --accent-soft: #dfe5fc;
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e141c; --surface: #151d28; --ink: #e6ebf1; --muted: #93a1b0;
+    --line: #263241; --accent: #8ea6ff; --accent-ink: #0e141c; --accent-soft: #1d2a4d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0e141c; --surface: #151d28; --ink: #e6ebf1; --muted: #93a1b0;
+  --line: #263241; --accent: #8ea6ff; --accent-ink: #0e141c; --accent-soft: #1d2a4d;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  padding-inline: 16px;
+  padding-block: 0;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.wrap { max-width: 1040px; margin-inline: auto; }
+
+/* top bar */
+.bar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  margin-inline: -16px; padding-inline: 16px;
+}
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; }
+.mark { font-family: var(--font-mono); font-size: 14px; font-weight: 500; text-decoration: none; white-space: nowrap; }
+.mark b { color: var(--accent); font-weight: 500; }
+nav { display: flex; align-items: center; gap: 4px 18px; flex-wrap: wrap; justify-content: flex-end; }
+nav a { font-size: 14px; text-decoration: none; color: var(--muted); padding-block: 2px; }
+nav a:hover { color: var(--ink); }
+.theme {
+  font: inherit; font-family: var(--font-mono); font-size: 12px;
+  background: transparent; color: var(--ink);
+  border: 1px solid var(--line); border-radius: 4px; padding: 3px 8px; cursor: pointer;
+}
+.theme:hover { border-color: var(--accent); }
+
+/* hero */
+.hero {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: -1px -1px;
+  margin-inline: -16px; padding-inline: 16px;
+  border-bottom: 1px solid var(--line);
+}
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; align-items: center; padding-block: 72px; }
+.eyebrow { font-family: var(--font-mono); font-size: 13px; color: var(--accent); letter-spacing: 0.04em; margin: 0 0 16px; }
+h1 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(3rem, 9vw, 6rem); line-height: 0.95; letter-spacing: -0.03em;
+  margin: 0 0 20px; text-wrap: balance;
+}
+h1 span { display: block; }
+h1 .last { color: var(--accent); }
+.lede { font-size: 1.125rem; max-width: 36ch; margin: 0 0 28px; color: var(--ink); }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn {
+  font-family: var(--font-body); font-weight: 600; font-size: 15px; text-decoration: none;
+  padding: 10px 18px; border-radius: 4px; border: 1px solid var(--ink);
+}
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.08); }
+.btn.ghost { background: var(--bg); color: var(--ink); }
+.btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+.idcard {
+  background: var(--surface); border: 1px solid var(--ink); border-radius: 6px;
+  box-shadow: 6px 6px 0 var(--accent);
+  padding: 20px; font-family: var(--font-mono); font-size: 13px;
+  transform: rotate(1.2deg);
+}
+.idcard .head { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--line); padding-bottom: 12px; margin-bottom: 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; }
+.idcard dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 8px 16px; }
+.idcard dt { color: var(--muted); }
+.idcard dd { margin: 0; color: var(--ink); overflow-wrap: anywhere; }
+.idcard .foot { margin-top: 16px; padding-top: 12px; border-top: 1px dashed var(--line); color: var(--muted); font-size: 11px; display: flex; align-items: center; gap: 8px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex: none; }
+
+/* sections */
+section { padding-block: 72px; border-bottom: 1px solid var(--line); scroll-margin-top: 56px; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 32px; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.75rem, 4vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1; margin: 0; text-wrap: balance; }
+.tag { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+
+/* about */
+.about { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 40px; }
+.about p { margin: 0 0 16px; max-width: 62ch; }
+.about p:last-child { margin-bottom: 0; }
+.codebox { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow-x: auto; }
+.codebox .tab { font-family: var(--font-mono); font-size: 12px; color: var(--muted); padding: 8px 14px; border-bottom: 1px solid var(--line); }
+.codebox pre { margin: 0; padding: 14px; font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--ink); }
+.k { color: var(--accent); }
+.s { color: var(--muted); }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); background: var(--surface); }
+.skill-group { padding: 24px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); min-width: 0; }
+.skill-group:nth-child(2n) { border-right: 0; }
+.skill-group:nth-last-child(-n+2) { border-bottom: 0; }
+.skill-group h3 { font-family: var(--font-mono); font-size: 12px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin: 0 0 14px; }
+.chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-size: 14px; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--ink); background: var(--bg); display: inline-flex; align-items: center; gap: 6px; }
+.chip.learning { border-style: dashed; border-color: var(--muted); color: var(--muted); }
+.chip.learning::before { content: ""; width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--muted); }
+.legend { margin: 16px 0 0; font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 20px; }
+
+/* projects */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.filters button {
+  font-family: var(--font-mono); font-size: 13px; color: var(--ink); background: transparent;
+  border: 1px solid var(--line); border-radius: 4px; padding: 5px 12px; cursor: pointer;
+}
+.filters button:hover { border-color: var(--accent); }
+.filters button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.projects { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.project { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 8px 24px; padding-block: 24px; border-bottom: 1px solid var(--line); align-items: start; }
+.project[hidden] { display: none !important; }
+.project .id { font-family: var(--font-mono); font-size: 13px; color: var(--accent); padding-top: 6px; }
+.project h3 { font-family: var(--font-display); font-weight: 700; font-size: 1.375rem; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 6px; }
+.project p { margin: 0 0 12px; color: var(--muted); max-width: 60ch; }
+.project .learned { font-size: 14px; color: var(--ink); margin: 0 0 12px; }
+.project .learned b { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--accent); margin-right: 6px; }
+.stack { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.stack li { font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; background: var(--accent-soft); color: var(--ink); border-radius: 3px; }
+.status { font-family: var(--font-mono); font-size: 12px; padding: 3px 10px; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; margin-top: 4px; color: var(--muted); }
+.status.done { border-color: var(--accent); color: var(--accent); }
+.note { margin-top: 20px; font-size: 14px; color: var(--muted); }
+
+/* contact */
+.contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+.contact p { margin: 0; max-width: 44ch; }
+.links { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--ink); }
+.links li { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-block: 14px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 14px; }
+.links span:first-child { color: var(--muted); }
+.links span:last-child { overflow-wrap: anywhere; }
+
+footer { padding-block: 32px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; }
+
+@media (max-width: 760px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); padding-block: 48px; gap: 40px; }
+  .idcard { transform: none; }
+  .about, .contact { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .skills { grid-template-columns: minmax(0, 1fr); }
+  .skill-group, .skill-group:nth-child(2n) { border-right: 0; }
+  .skill-group:nth-last-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .skill-group:last-child { border-bottom: 0; }
+  .project { grid-template-columns: minmax(0, 1fr) auto; }
+  .project .id { grid-column: 1 / -1; padding-top: 0; }
+  section { padding-block: 52px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mark" href="#top">zeel<b>.</b>rajput</a>
+    <nav aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="theme" id="theme" type="button" aria-label="Switch colour theme">theme</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">B.Tech CSE Core / JECRC University, Jaipur</p>
+        <h1><span>Zeel</span><span class="last">Rajput</span></h1>
+        <p class="lede">Computer science student who likes building small, useful things and understanding how they work underneath.</p>
+        <div class="cta">
+          <a class="btn primary" href="#projects">See my projects</a>
+          <a class="btn ghost" href="#skills">What I know</a>
+        </div>
+      </div>
+      <aside class="idcard" aria-label="Student summary">
+        <div class="head"><span>Student record</span><span>2026</span></div>
+        <dl>
+          <dt>name</dt><dd>Zeel Rajput</dd>
+          <dt>degree</dt><dd>B.Tech CSE Core</dd>
+          <dt>section</dt><dd>N</dd>
+          <dt>campus</dt><dd>JECRC University, Jaipur</dd>
+          <dt>focus</dt><dd>Web, DSA, Python</dd>
+        </dl>
+        <div class="foot"><span class="dot"></span><span>Open to learning, internships and good projects</span></div>
+      </aside>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head"><h2>About</h2><span class="tag">// who is behind the code</span></div>
+      <div class="about">
+        <div>
+          <p>I am a first-year B.Tech student in Computer Science Engineering at JECRC University in Jaipur. I started programming to see how an idea turns into something people can click, run and use.</p>
+          <p>Right now I am working through the core of the degree: C and C++ for problem solving, Python for quick experiments, and HTML, CSS and JavaScript for building pages. I learn best by building a small project for every new topic.</p>
+          <p>This site is one of those projects. It is a learning build, and I will keep editing it as my skills grow.</p>
+        </div>
+        <div class="codebox">
+          <div class="tab">zeel.js</div>
+<pre><span class="k">const</span> zeel = {
+  degree:   <span class="s">"B.Tech CSE Core"</span>,
+  college:  <span class="s">"JECRC University"</span>,
+  city:     <span class="s">"Jaipur"</span>,
+  learning: [<span class="s">"DSA in C++"</span>, <span class="s">"React"</span>, <span class="s">"SQL"</span>],
+  goal:     <span class="s">"ship one project a month"</span>
+};</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head"><h2>Skills</h2><span class="tag">// solid lines are comfortable, dashed lines are in progress</span></div>
+      <div class="skills">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <ul class="chips">
+            <li class="chip">C</li>
+            <li class="chip">C++</li>
+            <li class="chip">Python</li>
+            <li class="chip">JavaScript</li>
+            <li class="chip learning">Java</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Web</h3>
+          <ul class="chips">
+            <li class="chip">HTML5</li>
+            <li class="chip">CSS3</li>
+            <li class="chip">Responsive layout</li>
+            <li class="chip learning">React</li>
+            <li class="chip learning">Node.js</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Computer science core</h3>
+          <ul class="chips">
+            <li class="chip">Problem solving</li>
+            <li class="chip">OOP basics</li>
+            <li class="chip learning">Data structures</li>
+            <li class="chip learning">Algorithms</li>
+            <li class="chip learning">DBMS and SQL</li>
+            <li class="chip learning">Operating systems</li>
+          </ul>
+        </div>
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <ul class="chips">
+            <li class="chip">VS Code</li>
+            <li class="chip">Git</li>
+            <li class="chip">GitHub</li>
+            <li class="chip learning">Linux shell</li>
+            <li class="chip learning">Figma</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="sec-head"><h2>Projects</h2><span class="tag">// one per topic I learned</span></div>
+      <div class="filters" role="group" aria-label="Filter projects by stack">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="web" aria-pressed="false">Web</button>
+        <button type="button" data-filter="python" aria-pressed="false">Python</button>
+        <button type="button" data-filter="cpp" aria-pressed="false">C++</button>
+      </div>
+      <ol class="projects" id="project-list">
+        <li class="project" data-tags="web">
+          <span class="id">P-01</span>
+          <div>
+            <h3>Personal Portfolio</h3>
+            <p>The site you are reading. One page with light and dark themes, a project filter and a layout that works down to phone width.</p>
+            <p class="learned"><b>learned</b>CSS grid, custom properties, media queries</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <span class="status done">built</span>
+        </li>
+        <li class="project" data-tags="web">
+          <span class="id">P-02</span>
+          <div>
+            <h3>Task Tracker</h3>
+            <p>A to-do list where tasks can be added, ticked off, edited and deleted. Tasks stay saved in the browser after a refresh.</p>
+            <p class="learned"><b>learned</b>DOM events, arrays, localStorage</p>
+            <ul class="stack"><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+          </div>
+          <span class="status done">built</span>
+        </li>
+        <li class="project" data-tags="cpp">
+          <span class="id">P-03</span>
+          <div>
+            <h3>Student Marks Manager</h3>
+            <p>A console program that stores marks for a class, calculates totals and percentages, and prints a ranked result sheet.</p>
+            <p class="learned"><b>learned</b>classes, file handling, sorting</p>
+            <ul class="stack"><li>C++</li><li>OOP</li><li>File I/O</li></ul>
+          </div>
+          <span class="status done">built</span>
+        </li>
+        <li class="project" data-tags="python">
+          <span class="id">P-04</span>
+          <div>
+            <h3>Expense Splitter</h3>
+            <p>Takes the amounts paid by each friend on a trip and works out who owes whom, using the fewest possible payments.</p>
+            <p class="learned"><b>learned</b>dictionaries, greedy approach, input checks</p>
+            <ul class="stack"><li>Python</li><li>Algorithms</li></ul>
+          </div>
+          <span class="status done">built</span>
+        </li>
+        <li class="project" data-tags="python">
+          <span class="id">P-05</span>
+          <div>
+            <h3>Library Management System</h3>
+            <p>Lets a librarian add books, issue and return them, and see which copies are overdue. Records live in a small database.</p>
+            <p class="learned"><b>learned</b>SQL tables, joins, CRUD operations</p>
+            <ul class="stack"><li>Python</li><li>SQLite</li></ul>
+          </div>
+          <span class="status">in progress</span>
+        </li>
+        <li class="project" data-tags="web">
+          <span class="id">P-06</span>
+          <div>
+            <h3>Weather Dashboard</h3>
+            <p>Search a city and see the current temperature and a short forecast, pulled from a public weather API.</p>
+            <p class="learned"><b>learned</b>fetch, async code, JSON</p>
+            <ul class="stack"><li>JavaScript</li><li>REST API</li></ul>
+          </div>
+          <span class="status">next up</span>
+        </li>
+      </ol>
+      <p class="note">These are learning projects. Project links will go here once each one is pushed to GitHub.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sec-head"><h2>Contact</h2><span class="tag">// say hello</span></div>
+      <div class="contact">
+        <p>I am happy to connect about projects, study groups or internship opportunities. You can find me on GitHub and LinkedIn using the links below.</p>
+        <ul class="links">
+          <li><span>email</span><span>your-email@example.com</span></li>
+          <li><span>github</span><span><a href="https://github.com/zeelrajput306-hash" target="_blank" rel="noopener noreferrer">github.com/zeelrajput306-hash ↗</a></span></li>
+          <li><span>linkedin</span><span><a href="https://www.linkedin.com/in/zeel-rajput-716757432/" target="_blank" rel="noopener noreferrer">linkedin.com/in/zeel-rajput-716757432 ↗</a></span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <span>Zeel Rajput / B.Tech CSE Core / JECRC University, Jaipur</span>
+    <span>Built with HTML, CSS and JavaScript</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  // theme toggle
+  var btn = document.getElementById('theme');
+  function currentIsDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  try {
+    var saved = localStorage.getItem('zeel-theme');
+    if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  } catch (e) {}
+  btn.addEventListener('click', function () {
+    var next = currentIsDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('zeel-theme', next); } catch (e) {}
+  });
+
+  // project filter
+  var buttons = document.querySelectorAll('.filters button');
+  var items = document.querySelectorAll('#project-list .project');
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var f = b.getAttribute('data-filter');
+      buttons.forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      items.forEach(function (li) {
+        var tags = li.getAttribute('data-tags').split(' ');
+        li.hidden = !(f === 'all' || tags.indexOf(f) !== -1);
+      });
+    });
+  });
+})();
+</script>
